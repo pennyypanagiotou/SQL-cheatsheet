@@ -61,7 +61,7 @@
 
 ---
 
-## SELECT Statement
+## SELECT 
 
 | Command | Description |
 |--------|-------------|
@@ -71,12 +71,12 @@
 | `SELECT COUNT(DISTINCT Country) FROM Customers;` | Count distinct values (not supported in MS Access) |
 | MS Access workaround: | `SELECT Count(*) AS DistinctCountries FROM (SELECT DISTINCT Country FROM Customers);` |
 
-## WHERE Clause
+---
+
+## WHERE 
 
 - The **WHERE** clause is used to **filter records**  
 - It extracts only those records that fulfill a specified condition  
-
-## WHERE Clause Examples
 
 | Command | Description |
 |---------|------------|
@@ -98,7 +98,22 @@
 | `LIKE`     | Search for a pattern |
 | `IN`       | Specify multiple possible values |
 
-## ORDER BY Examples
+
+## SQL Logical Operators (AND, OR, NOT)
+
+| Command | Description |
+|---------|------------|
+| `SELECT * FROM table_name WHERE condition1 AND condition2;` | Returns rows where **all conditions** are TRUE |
+| `SELECT * FROM table_name WHERE condition1 OR condition2;` | Returns rows where **any condition** is TRUE |
+| `SELECT * FROM table_name WHERE condition1 AND (condition2 OR condition3);` | Combines AND and OR for complex filtering |
+| `SELECT * FROM table_name WHERE NOT condition;` | Reverses the condition, returns rows where the condition is FALSE |
+| `SELECT * FROM table_name WHERE column NOT LIKE 'pattern';` | Returns rows where column does **not** match the pattern |
+| `SELECT * FROM table_name WHERE column NOT BETWEEN value1 AND value2;` | Returns rows where column is **not** within the specified range |
+| `SELECT * FROM table_name WHERE column NOT IN (value1, value2, ...);` | Returns rows where column value is **not** in the specified list |
+
+---
+
+## ORDER BY 
 
 - The **ORDER BY** keyword sorts records in ascending order by default  
 - Use **DESC** to sort in descending order  
@@ -112,18 +127,7 @@
 | `SELECT * FROM Customers ORDER BY Country, CustomerName;` | Sort customers by Country and CustomerName |
 | `SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;` | Sort ascending by Country and descending by CustomerName |
 
-
-## SQL Logical Operators (AND, OR, NOT)
-
-| Command | Description |
-|---------|------------|
-| `SELECT * FROM table_name WHERE condition1 AND condition2;` | Returns rows where **all conditions** are TRUE |
-| `SELECT * FROM table_name WHERE condition1 OR condition2;` | Returns rows where **any condition** is TRUE |
-| `SELECT * FROM table_name WHERE condition1 AND (condition2 OR condition3);` | Combines AND and OR for complex filtering |
-| `SELECT * FROM table_name WHERE NOT condition;` | Reverses the condition, returns rows where the condition is FALSE |
-| `SELECT * FROM table_name WHERE column NOT LIKE 'pattern';` | Returns rows where column does **not** match the pattern |
-| `SELECT * FROM table_name WHERE column NOT BETWEEN value1 AND value2;` | Returns rows where column is **not** within the specified range |
-| `SELECT * FROM table_name WHERE column NOT IN (value1, value2, ...);` | Returns rows where column value is **not** in the specified list |
+---
 
 ## INSERT INTO
 The INSERT INTO statement is used to insert new records in a table.
@@ -138,6 +142,8 @@ The INSERT INTO statement is used to insert new records in a table.
 | `INSERT INTO table_name VALUES (value1, value2,...);` | Insert data into all columns without specifying column names. The order of values must match the table column order |
 | `INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1a, value2a, value3a, ...), (value1b, value2b, value3b, ...),(value1c, value2c, value3c, ...);` | Insert multiple rows of data in a single statement. Each set of values must be separated by a comma `,` |
 
+---
+
 ## NULL Values
 
 A field with a NULL value is a field with no value.  
@@ -150,7 +156,7 @@ If a field is optional, it can be left empty when inserting or updating a record
 
 ---
 
-## UPDATE Statement
+## UPDATE
 
 The UPDATE statement is used to **modify existing records** in a table.  
 Be careful: omitting the WHERE clause updates **all records** in the table.
@@ -163,7 +169,7 @@ Be careful: omitting the WHERE clause updates **all records** in the table.
 
 ---
 
-## DELETE Statement
+## DELETE
 
 The DELETE statement is used to **remove existing records** from a table.  
 Be careful: omitting the WHERE clause deletes **all rows**.
@@ -173,9 +179,8 @@ Be careful: omitting the WHERE clause deletes **all rows**.
 | `DELETE FROM table_name WHERE condition;` | Deletes only the rows that match the condition |
 | `DELETE FROM table_name;` | Deletes **all rows** but keeps the table structure and indexes intact |
 
----
 
-## DROP TABLE Statement
+## DROP TABLE 
 
 Use the DROP TABLE statement to **completely remove a table** from the database.
 
@@ -183,3 +188,5 @@ Use the DROP TABLE statement to **completely remove a table** from the database.
 |---------|------------|
 | `DROP TABLE table_name;` | Deletes the table and all its data permanently |
 | `DROP TABLE Customers;` | Example: completely remove the Customers table |
+
+---
