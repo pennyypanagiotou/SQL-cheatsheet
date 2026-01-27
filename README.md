@@ -112,7 +112,6 @@
 | `SELECT * FROM Customers ORDER BY Country, CustomerName;` | Sort customers by Country and CustomerName |
 | `SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;` | Sort ascending by Country and descending by CustomerName |
 
-## AND, OR, NOT Operators
 
 ## SQL Logical Operators (AND, OR, NOT)
 
@@ -139,3 +138,48 @@ The INSERT INTO statement is used to insert new records in a table.
 | `INSERT INTO table_name VALUES (value1, value2,...);` | Insert data into all columns without specifying column names. The order of values must match the table column order |
 | `INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1a, value2a, value3a, ...), (value1b, value2b, value3b, ...),(value1c, value2c, value3c, ...);` | Insert multiple rows of data in a single statement. Each set of values must be separated by a comma `,` |
 
+## NULL Values
+
+A field with a NULL value is a field with no value.  
+If a field is optional, it can be left empty when inserting or updating a record.
+
+| Command | Description |
+|---------|------------|
+| `SELECT column_names FROM table_name WHERE column_name IS NULL;` | Selects records where the column value is NULL |
+| `SELECT column_names FROM table_name WHERE column_name IS NOT NULL;` | Selects records where the column value is NOT NULL |
+
+---
+
+## UPDATE Statement
+
+The UPDATE statement is used to **modify existing records** in a table.  
+Be careful: omitting the WHERE clause updates **all records** in the table.
+
+| Command | Description |
+|---------|------------|
+| `UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;` | General syntax to update one or more columns for records matching the condition |
+| `UPDATE Customers SET ContactName='Juan' WHERE Country='Mexico';` | Example: update specific records based on a condition |
+| `UPDATE Customers SET ContactName='Juan';` | Updates **all records** in the table (no WHERE clause) |
+
+---
+
+## DELETE Statement
+
+The DELETE statement is used to **remove existing records** from a table.  
+Be careful: omitting the WHERE clause deletes **all rows**.
+
+| Command | Description |
+|---------|------------|
+| `DELETE FROM table_name WHERE condition;` | Deletes only the rows that match the condition |
+| `DELETE FROM table_name;` | Deletes **all rows** but keeps the table structure and indexes intact |
+
+---
+
+## DROP TABLE Statement
+
+Use the DROP TABLE statement to **completely remove a table** from the database.
+
+| Command | Description |
+|---------|------------|
+| `DROP TABLE table_name;` | Deletes the table and all its data permanently |
+| `DROP TABLE Customers;` | Example: completely remove the Customers table |
