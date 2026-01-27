@@ -98,7 +98,6 @@
 | `LIKE`     | Search for a pattern |
 | `IN`       | Specify multiple possible values |
 
-
 ## SQL Logical Operators (AND, OR, NOT)
 
 | Command | Description |
