@@ -114,34 +114,28 @@
 
 ## AND, OR, NOT Operators
 
+## SQL Logical Operators (AND, OR, NOT)
+
 | Command | Description |
 |---------|------------|
-| `SELECT * FROM Customers WHERE Country = 'Spain' AND CustomerName LIKE 'G%';` | The AND operator displays a record if all conditions are TRUE |
-| `SELECT * FROM Customers WHERE Country = 'Spain' AND (CustomerName LIKE 'G%' OR CustomerName LIKE 'R%');` | Combines AND and OR to filter records based on multiple conditions |
-| `SELECT column1, column2, ... FROM table_name WHERE condition1 OR condition2 OR condition3 ...;` | The OR operator displays a record if any of the conditions are TRUE |
-| `SELECT * FROM Customers WHERE CustomerName NOT LIKE 'A%';` | The NOT operator gives the opposite result of LIKE |
-| `SELECT * FROM Customers WHERE CustomerID NOT BETWEEN 10 AND 60;` | The NOT operator reverses BETWEEN condition |
-| `SELECT * FROM Customers WHERE City NOT IN ('Paris', 'London');` | The NOT operator reverses IN condition |
-| `SELECT * FROM Customers WHERE NOT CustomerID > 50;` | The NOT operator reverses greater than condition |
-| `SELECT * FROM Customers WHERE NOT CustomerID < 50;` | The NOT operator reverses less than condition |
+| `SELECT * FROM table_name WHERE condition1 AND condition2;` | Returns rows where **all conditions** are TRUE |
+| `SELECT * FROM table_name WHERE condition1 OR condition2;` | Returns rows where **any condition** is TRUE |
+| `SELECT * FROM table_name WHERE condition1 AND (condition2 OR condition3);` | Combines AND and OR for complex filtering |
+| `SELECT * FROM table_name WHERE NOT condition;` | Reverses the condition, returns rows where the condition is FALSE |
+| `SELECT * FROM table_name WHERE column NOT LIKE 'pattern';` | Returns rows where column does **not** match the pattern |
+| `SELECT * FROM table_name WHERE column NOT BETWEEN value1 AND value2;` | Returns rows where column is **not** within the specified range |
+| `SELECT * FROM table_name WHERE column NOT IN (value1, value2, ...);` | Returns rows where column value is **not** in the specified list |
 
 ## INSERT INTO
+The INSERT INTO statement is used to insert new records in a table.
 
 ### INSERT INTO Syntax
 
-It is possible to write the INSERT INTO statement in two ways:
-
 | Command | Description |
 |---------|------------|
-| `INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);` | Specify both the column names and the values to be inserted |
-| `INSERT INTO table_name VALUES (value1, value2, value3, ...);` | Insert values for all columns without specifying column names (order must match table columns) |
-| `INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);` | Insert data into specific columns only. The order of values must match the specified columns |
-| `INSERT INTO table_name VALUES (value1, value2, value3, ...);` | Insert data into all columns without specifying column names. The order of values must match the table column order |
-| ```sql
-INSERT INTO table_name (column1, column2, column3, ...)
-VALUES
-(value1a, value2a, value3a, ...),
-(value1b, value2b, value3b, ...),
-(value1c, value2c, value3c, ...);
-``` | Insert multiple rows of data in a single statement. Each set of values must be separated by a comma `,` |
+| `INSERT INTO table_name (column1, column2, ...) VALUES (value1, value2, ...);` | Specify both the column names and the values to be inserted |
+| `INSERT INTO table_name VALUES (value1, value2, ...);` | Insert values for all columns without specifying column names (order must match table columns) |
+| `INSERT INTO table_name (column1, column2...) VALUES (value1, value2,...);` | Insert data into specific columns only. The order of values must match the specified columns |
+| `INSERT INTO table_name VALUES (value1, value2,...);` | Insert data into all columns without specifying column names. The order of values must match the table column order |
+| `INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1a, value2a, value3a, ...), (value1b, value2b, value3b, ...),(value1c, value2c, value3c, ...);` | Insert multiple rows of data in a single statement. Each set of values must be separated by a comma `,` |
 
