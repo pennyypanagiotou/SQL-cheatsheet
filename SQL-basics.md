@@ -35,7 +35,6 @@
 | `SELECT CustomerName, City FROM Customers;` | Select specific columns |
 | `SELECT DISTINCT Country FROM Customers;` | Return only distinct (different) values |
 | `SELECT COUNT(DISTINCT Country) FROM Customers;` | Count distinct values (not supported in MS Access) |
-| MS Access workaround: | `SELECT Count(*) AS DistinctCountries FROM (SELECT DISTINCT Country FROM Customers);` |
 
 ---
 
@@ -101,11 +100,11 @@ The INSERT INTO statement is used to insert new records in a table.
 
 | Command | Description |
 |---------|------------|
-| `INSERT INTO table_name (column1, column2, ...) VALUES (value1, value2, ...);` | Specify both the column names and the values to be inserted |
 | `INSERT INTO table_name (column1, column2...) VALUES (value1, value2,...);` | Insert data into specific columns only. The order of values must match the specified columns |
 | `INSERT INTO table_name VALUES (value1, value2,...);` | Insert data into all columns without specifying column names. The order of values must match the table column order |
-| `INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1a, value2a, value3a, ...), (value1b, value2b, value3b, ...),(value1c, value2c, value3c, ...);` | Insert multiple rows of data in a single statement. Each set of values must be separated by a comma `,` |
-
+| `INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1a, value2a, value3a, ...), (value1b, value2b, value3b, ...),(value1c, value2c, value3c, ...);` | Insert multiple rows of data in a single statement. Each set of values must be separated by a comma `,` ** |
+ 
+** Not valid in **Oracle SQL**
 ---
 
 ## NULL Values
@@ -154,3 +153,26 @@ Use the DROP TABLE statement to **completely remove a table** from the database.
 | `DROP TABLE Customers;` | Example: completely remove the Customers table |
 
 ---
+# FIND TABLE'S PRIMARY KEY OR COMPOSITE KEY (KEY1,KEY2)
+SELECT cols.column_name
+FROM user_constraints cons
+JOIN user_cons_columns cols
+  ON cons.constraint_name = cols.constraint_name
+WHERE cons.constraint_type = 'P'
+  AND cons.table_name = 'TABLE';
+
+
+# FIND TABLE'S FOREIGN KEY(S)
+SELECT
+  a.column_name,
+  c_pk.table_name AS referenced_table,
+  b.column_name AS referenced_column
+FROM user_constraints c
+JOIN user_cons_columns a
+  ON c.constraint_name = a.constraint_name
+JOIN user_constraints c_pk
+  ON c.r_constraint_name = c_pk.constraint_name
+JOIN user_cons_columns b
+  ON c_pk.constraint_name = b.constraint_name
+WHERE c.constraint_type = 'R'
+  AND c.table_name = 'TABLE';
