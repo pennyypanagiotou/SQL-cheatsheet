@@ -373,8 +373,8 @@ and **removes duplicate rows** by default.
 | `SELECT column_name(s) FROM table1 UNION SELECT column_name(s) FROM table2;` | Combines results from two `SELECT` statements **removing duplicate rows** |
 | `SELECT column_name(s) FROM table1 UNION ALL SELECT column_name(s) FROM table2;` | Combines results from two `SELECT` statements **keeping all rows**, including duplicates |
 
-### Primary and foreign keys
-## FIND TABLE'S PRIMARY KEY OR COMPOSITE KEY (KEY1,KEY2)
+# Primary and foreign keys
+### FIND TABLE'S PRIMARY KEY OR COMPOSITE KEY (KEY1,KEY2)
 SELECT cols.column_name
 FROM user_constraints cons
 JOIN user_cons_columns cols
@@ -383,7 +383,7 @@ WHERE cons.constraint_type = 'P'
   AND cons.table_name = 'TABLE_NAME';
 
 
-## FIND TABLE'S FOREIGN KEY(S)
+### FIND TABLE'S FOREIGN KEY(S)
 SELECT
   a.column_name,
   c_pk.table_name AS referenced_table,
