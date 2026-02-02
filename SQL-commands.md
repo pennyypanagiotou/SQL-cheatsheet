@@ -7,9 +7,12 @@ This cheat sheet covers SQL syntax and common commands used to manage and query 
 - **Single-line comments**: `--`  
 - **Multi-line comments**: `/* comment */`
 
+---
+
 ### Semicolon in SQL
 - Some database systems require a semicolon `;` at the end of each SQL statement.  
 - Semicolon separates multiple statements in one call.
+---
 
 ### SQL Arithmetic Operators
 
@@ -20,6 +23,7 @@ This cheat sheet covers SQL syntax and common commands used to manage and query 
 | `*`      | Multiplication |
 | `/`      | Division |
 | `%`      | Modulo |
+---
 
 ### SQL Aliases
 - Give a temporary name to a column or table.  
@@ -45,7 +49,7 @@ This cheat sheet covers SQL syntax and common commands used to manage and query 
 | `SELECT DISTINCT Country FROM Customers;` | Return distinct values |
 | `SELECT COUNT(DISTINCT Country) FROM Customers;` | Count distinct values |
 
-
+---
 
 #### Logical Operators
 
@@ -68,6 +72,8 @@ This cheat sheet covers SQL syntax and common commands used to manage and query 
 | `BETWEEN` | Within a range |
 | `LIKE` | Pattern match |
 | `IN` | Multiple values |
+
+---
 
 ### WHERE
 Filters rows that meet a condition.
@@ -191,6 +197,8 @@ Aggregate functions perform a calculation on a set of values and return a **sing
 | `SELECT SUM(column) FROM TABLE` | Sum of numeric values |
 | `SELECT AVG(column) FROM TABLE` | Average value |
 
+---
+
 ### GROUP BY
 The **GROUP BY** clause is used to **group rows that have the same values** in specified columns.  
 It is often used with **aggregate functions** (COUNT, SUM, AVG, MIN, MAX) to return **summary information per group**.  
@@ -202,6 +210,8 @@ It is often used with **aggregate functions** (COUNT, SUM, AVG, MIN, MAX) to ret
 
 **Notes:**  
 - `HAVING` is like `WHERE` but **applies to groups** rather than individual rows.
+
+---
 
 ### CASE Expression
 The **CASE** expression allows you to implement **conditional logic** in SQL queries.  
@@ -226,12 +236,16 @@ It works like an `IF-THEN-ELSE` statement and can be used in `SELECT`, `UPDATE`,
 | `INSERT INTO table_name VALUES (val1, val2, ...);` | Insert all columns |
 | `INSERT INTO table_name (col1, col2) VALUES (val1a, val2a), (val1b, val2b);` | Multiple rows (not Oracle) |
 
+---
+
 ### UPDATE
 
 | Command | Description |
 |---------|------------|
 | `UPDATE Customers SET ContactName='Juan' WHERE CustomerID=1;` | Update specific row(s) |
 | `UPDATE Customers SET ContactName='Juan';` | Update all rows |
+
+---
 
 ### DELETE
 
@@ -240,6 +254,8 @@ It works like an `IF-THEN-ELSE` statement and can be used in `SELECT`, `UPDATE`,
 | `DELETE FROM Customers WHERE CustomerID=1;` | Delete specific rows |
 | `DELETE FROM Customers;` | Delete all rows |
 
+---
+
 ### SELECT INTO
 Copy data into a new table.
 
@@ -247,6 +263,8 @@ Copy data into a new table.
 |---------|------------|
 | `SELECT * INTO new_table FROM old_table;` | Copy all columns |
 | `SELECT col1, col2 INTO new_table FROM old_table;` | Copy specific columns |
+
+---
 
 ### INSERT INTO … SELECT
 Copy data into an existing table.
@@ -267,11 +285,15 @@ Copy data into an existing table.
 | `CREATE DATABASE dbname;` | Create database |
 | `DROP DATABASE dbname;` | Drop database |
 
+---
+
 ### BACKUP DATABASE (SQL Server)
 
 | Command | Description |
 |---------|------------|
 | `BACKUP DATABASE dbname TO DISK = 'filepath';` | Full backup |
+
+---
 
 ### CREATE / DROP TABLE
 
@@ -285,7 +307,9 @@ Copy data into an existing table.
 | `ALTER TABLE table_name ALTER/MODIFY COLUMN col datatype;` | Change column type |
 | `ALTER TABLE table_name RENAME COLUMN old TO new;` | Rename column |
 
-## SQL ALTER TABLE
+---
+
+### SQL ALTER TABLE
 
 | Command | Description |
 |--------|------------|
@@ -295,6 +319,8 @@ Copy data into an existing table.
 | `EXEC sp_rename 'table_name.old_name', 'new_name', 'COLUMN';` | Renames a column in SQL Server |
 | `ALTER TABLE table_name ALTER COLUMN column_name datatype;` | Changes the data type of a column (SQL Server / MS Access) |
 | `ALTER TABLE table_name MODIFY COLUMN column_name datatype;` | Changes the data type of a column (MySQL / Oracle) |
+
+---
 
 ### Constraints
 
@@ -373,3 +399,5 @@ WHERE c.constraint_type = 'R'
   AND c.table_name = 'TABLE_NAME';
 
 ;
+
+---
