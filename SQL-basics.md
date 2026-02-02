@@ -2,23 +2,11 @@
 
 ## Introduction
 
-## Basic SQL Commands
+## SQL Comments
 
-| Command | Description |
-|--------|-------------|
-| SELECT | Extracts data from a database |
-| UPDATE | Updates data in a database |
-| DELETE | Deletes data from a database |
-| INSERT INTO | Inserts new data into a database |
-| CREATE DATABASE | Creates a new database |
-| ALTER DATABASE | Modifies a database |
-| CREATE TABLE | Creates a new table |
-| ALTER TABLE | Modifies a table |
-| DROP TABLE | Deletes a table |
-| CREATE INDEX | Creates an index (search key) |
-| DROP INDEX | Deletes an index |
-
----
+### Single Line Comments
+Single-line comments start with `--`.  
+Any text between `--` and the end of the line is ignored and not executed.
 
 ## Semicolon in SQL
 
@@ -88,8 +76,8 @@
 | `SELECT * FROM Products ORDER BY Price DESC;` | Sort products from highest to lowest price |
 | `SELECT * FROM Products ORDER BY ProductName;` | Sort products alphabetically by ProductName |
 | `SELECT * FROM Products ORDER BY ProductName DESC;` | Sort products reverse alphabetically by ProductName |
-| `SELECT * FROM Customers ORDER BY Country, CustomerName;` | Sort customers by Country and CustomerName |
-| `SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;` | Sort ascending by Country and descending by CustomerName |
+| `SELECT * FROM Customers ORDER BY Country, CustomerName;` | Sorts the customers first alphabetically by Country, and within each country, sorts alphabetically by CustomerName. |
+| `SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;` | Sorts the customers alphabetically by Country , and within each country, sorts CustomerName in reverse alpabetically order |
 
 ---
 
@@ -212,16 +200,6 @@ Wildcards allow flexible matching:
 | `'_r%'` | 'r' in the second position | `SELECT * FROM Customers WHERE CustomerName LIKE '_r%';` |
 | `'Spain'` | Exact match | `SELECT * FROM Customers WHERE Country LIKE 'Spain';` |
 
-**Microsoft Access Wildcards:**
-
-| Symbol | Description | Example |
-|--------|------------|---------|
-| `*` | Zero or more characters | `bl*` finds 'bl', 'black', 'blue', 'blob' |
-| `?` | Single character | `h?t` finds 'hot', 'hat', 'hit' |
-| `[]` | Any single character in brackets | `h[oa]t` finds 'hot' and 'hat', not 'hit' |
-| `!` | Not in brackets | `h[!oa]t` finds 'hit', not 'hot' or 'hat' |
-| `-` | Range of characters in brackets | `c[a-b]t` finds 'cat', 'cbt' |
-| `#` | Single numeric character | `2#5` finds 205, 215, 225, etc. |
 
 ## SQL IN / NOT IN Operator
 
@@ -246,9 +224,7 @@ It is **inclusive**: both the start and end values are included.
 |---------|------------|---------|
 | `column_name BETWEEN value1 AND value2` | Returns rows where the column is within the range | `SELECT * FROM Products WHERE Price BETWEEN 10 AND 20;` |
 | `column_name NOT BETWEEN value1 AND value2` | Returns rows where the column is outside the range | `SELECT * FROM Products WHERE Price NOT BETWEEN 10 AND 20;` |
-| `column_name BETWEEN value1 AND value2 AND column_name IN (value_list)` | Combine BETWEEN with IN | `SELECT * FROM Products WHERE Price BETWEEN 10 AND 20 AND CategoryID IN (1,2,3);` |
 | `column_name BETWEEN 'Text1' AND 'Text2'` | Works with text values (alphabetical range) | `SELECT * FROM Products WHERE ProductName BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni';` |
-| `column_name NOT BETWEEN 'Text1' AND 'Text2'` | Excludes text values in the range | `SELECT * FROM Products WHERE ProductName NOT BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni';` |
 | `column_name BETWEEN 'StartDate' AND 'EndDate'` | Works with dates | `SELECT * FROM Orders WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';` |
 
 **Notes:**  
@@ -280,3 +256,292 @@ JOIN user_cons_columns b
   ON c_pk.constraint_name = b.constraint_name
 WHERE c.constraint_type = 'R'
   AND c.table_name = 'TABLE_NAME';
+
+;
+
+---
+
+## SQL CREATE DATABASE
+
+| Command | Description |
+|--------|------------|
+| `CREATE DATABASE databasename;` | Creates a new SQL database |
+
+---
+
+## SQL DROP DATABASE
+
+| Command | Description |
+|--------|------------|
+| `DROP DATABASE databasename;` | Drops an existing SQL database |
+
+---
+
+## SQL BACKUP DATABASE (SQL Server)
+
+| Command | Description |
+|--------|------------|
+| `BACKUP DATABASE databasename TO DISK = 'filepath';` | Creates a full backup of an existing database |
+
+---
+
+## SQL CREATE TABLE
+
+| Command | Description |
+|--------|------------|
+| `CREATE TABLE table_name (column1 datatype, column2 datatype, ...);` | Creates a new table with specified columns and data types |
+| `CREATE TABLE new_table AS SELECT column1, column2 FROM existing_table WHERE ...;` | Creates a new table from an existing table with optional filtering |
+
+---
+
+## SQL DROP TABLE
+
+| Command | Description |
+|--------|------------|
+| `DROP TABLE table_name;` | Deletes an existing table from the database |
+
+---
+
+## SQL ALTER TABLE
+
+| Command | Description |
+|--------|------------|
+| `ALTER TABLE table_name ADD column_name datatype;` | Adds a new column to an existing table |
+| `ALTER TABLE table_name DROP COLUMN column_name;` | Deletes a column from a table (some DBs may not allow this) |
+| `ALTER TABLE table_name RENAME COLUMN old_name TO new_name;` | Renames a column (SQL standard) |
+| `EXEC sp_rename 'table_name.old_name', 'new_name', 'COLUMN';` | Renames a column in SQL Server |
+| `ALTER TABLE table_name ALTER COLUMN column_name datatype;` | Changes the data type of a column (SQL Server / MS Access) |
+| `ALTER TABLE table_name MODIFY COLUMN column_name datatype;` | Changes the data type of a column (MySQL / Oracle) |
+
+---
+
+## SQL Constraints
+
+| Constraint | Description |
+|------------|------------|
+| `NOT NULL` | Column cannot have NULL values |
+| `UNIQUE` | All values in the column must be unique |
+| `PRIMARY KEY` | Combines NOT NULL and UNIQUE; uniquely identifies each row |
+| `FOREIGN KEY` | Ensures referential integrity between tables |
+| `CHECK` | Ensures column values satisfy a condition |
+| `DEFAULT` | Sets a default value for a column |
+| `CREATE INDEX` |  |
+
+---
+
+## SQL Working with Dates
+
+### MySQL Date Data Types
+
+| Data Type | Format | Description |
+|-----------|--------|------------|
+| `DATE` | YYYY-MM-DD | Stores date only |
+| `DATETIME` | YYYY-MM-DD HH:MI:SS | Stores date and time |
+| `TIMESTAMP` | YYYY-MM-DD HH:MI:SS | Stores timestamp value |
+| `YEAR` | YYYY or YY | Stores year only |
+
+### SQL Server Date Data Types
+
+| Data Type | Format | Description |
+|-----------|--------|------------|
+| `DATE` | YYYY-MM-DD | Stores date only |
+| `DATETIME` | YYYY-MM-DD HH:MI:SS | Stores date and time |
+| `SMALLDATETIME` | YYYY-MM-DD HH:MI:SS | Stores date and time with less precision |
+| `TIMESTAMP` | Unique number | Stores a unique timestamp value |
+
+
+# SQL Cheat Sheet pt.2
+
+## SQL GROUP BY Statement
+
+The `GROUP BY` statement groups rows with the same values.  
+Often used with aggregate functions: COUNT(), SUM(), AVG(), MIN(), MAX().
+
+| Command | Description |
+|--------|------------|
+| `SELECT column_name(s) FROM table_name GROUP BY column_name(s);` | Groups rows by column(s) |
+| `SELECT column_name(s) FROM table_name GROUP BY column_name(s) ORDER BY column_name(s);` | Groups rows and orders the result |
+| `SELECT Country, COUNT(*) FROM Customers GROUP BY Country;` | Example: count customers per country |
+
+---
+
+## SQL HAVING Clause
+
+Filters **grouped results** (cannot use WHERE with aggregates).
+
+| Command | Description |
+|--------|------------|
+| `SELECT column_name(s) FROM table_name GROUP BY column_name(s) HAVING condition;` | Filters groups after aggregation |
+| `SELECT Country, COUNT(*) FROM Customers GROUP BY Country HAVING COUNT(*) > 5;` | Example: only countries with more than 5 customers |
+
+---
+
+## SQL EXISTS Operator
+
+Checks if a subquery returns one or more rows.
+
+| Command | Description |
+|--------|------------|
+| `SELECT column_name(s) FROM table_name WHERE EXISTS (subquery);` | Returns rows if subquery has any record |
+| `SELECT * FROM Customers WHERE EXISTS (SELECT * FROM Orders WHERE Orders.CustomerID = Customers.CustomerID);` | Example: only customers with orders |
+
+---
+
+## SQL ANY / ALL Operators
+
+Compare a value to a set of values from a subquery.
+
+| Command | Description |
+|--------|------------|
+| `column_name operator ANY (subquery)` | TRUE if **any** value in subquery meets condition |
+| `column_name operator ALL (subquery)` | TRUE if **all** values in subquery meet condition |
+| `SELECT * FROM Products WHERE Price > ANY (SELECT Price FROM Products WHERE CategoryID=1);` | Example using ANY |
+| `SELECT * FROM Products WHERE Price > ALL (SELECT Price FROM Products WHERE CategoryID=1);` | Example using ALL |
+
+---
+
+## SQL SELECT INTO Statement
+
+Copies data from one table into a **new table**.
+
+| Command | Description |
+|--------|------------|
+| `SELECT * INTO new_table FROM old_table;` | Copies all columns into new table |
+| `SELECT column1, column2 INTO new_table FROM old_table;` | Copies specific columns into new table |
+
+---
+
+## SQL INSERT INTO SELECT Statement
+
+Copies data from one table into an **existing table**.
+
+| Command | Description |
+|--------|------------|
+| `INSERT INTO table2 SELECT * FROM table1;` | Copy all columns from one table to another |
+| `INSERT INTO table2 (col1, col2) SELECT col1, col2 FROM table1;` | Copy specific columns |
+
+---
+
+## SQL CASE Expression
+
+Used like **if–then–else**, returns value based on conditions.
+
+| Command | Description |
+|--------|------------|
+| `CASE WHEN condition THEN result ELSE result END` | General CASE syntax |
+| `SELECT CustomerName, CASE WHEN Country='Germany' THEN 'DE' ELSE 'Other' END AS CountryCode FROM Customers;` | Example using CASE |
+
+---
+
+## Stored Procedures
+
+Reusable SQL code that can accept parameters.
+
+| Command | Description |
+|--------|------------|
+| `CREATE PROCEDURE procedure_name AS sql_statement;` | Creates a stored procedure |
+| `EXEC procedure_name;` | Executes the stored procedure |
+
+---
+
+## SQL Arithmetic Operators
+
+| Command | Description |
+|--------|------------|
+| `+` | Addition |
+| `-` | Subtraction |
+| `*` | Multiplication |
+| `/` | Division |
+| `%` | Modulo |
+
+
+
+
+## SQL Aliases
+
+SQL aliases are used to give a **temporary name** to a table or a column.  
+Aliases exist **only for the duration of the query** and are used to make results more readable.  
+The `AS` keyword is optional.
+
+--
+
+### Alias Syntax
+
+| Command | Description |
+|--------|------------|
+| `SELECT column_name AS alias_name FROM table_name;` | Alias for a column |
+| `SELECT column_name alias_name FROM table_name;` | Column alias without using AS |
+| `SELECT column_name FROM table_name AS alias_name;` | Alias for a table |
+| `SELECT column_name FROM table_name alias_name;` | Table alias without AS |
+| `SELECT column_name AS "My Great Column" FROM table_name;` | Column alias with spaces |
+| `SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country AS Address FROM Customers;` | Alias combining multiple columns for SQL |
+
+---
+
+
+## SQL JOIN
+
+A JOIN clause is used to **combine rows from two or more tables** based on a related column.
+
+--
+
+### Types of JOINs
+
+| JOIN Type | Description |
+|----------|------------|
+| INNER JOIN | Returns records that have matching values in both tables |
+| LEFT JOIN | Returns all records from the left table and matched records from the right table |
+| RIGHT JOIN | Returns all records from the right table and matched records from the left table |
+| FULL JOIN | Returns all records when there is a match in either table |
+
+--
+
+## JOIN Syntax
+
+| Command | Description |
+|--------|------------|
+| `SELECT column_name(s) FROM table1 INNER JOIN table2 ON table1.column_name = table2.column_name;` | INNER JOIN syntax |
+| `SELECT column_name(s) FROM table1 LEFT JOIN table2 ON table1.column_name = table2.column_name;` | LEFT JOIN OR LEFT OUTTER JOIN|
+| `SELECT column_name(s) FROM table1 RIGHT JOIN table2 ON table1.column_name = table2.column_name;` | RIGHT JOIN OR RIGHT OUTER JOIN |
+| `SELECT column_name(s) FROM table1 FULL OUTER JOIN table2 ON table1.column_name = table2.column_name WHERE condition;` | FULL OUTER JOIN OR FULL JOIN |
+
+---
+
+## SQL SELF JOIN
+
+A **SELF JOIN** is a join where a table is joined with itself using aliases.
+
+| Command | Description |
+|--------|------------|
+| `SELECT column_name(s) FROM table_name T1, table_name T2 WHERE condition;` | Self join using aliases for the same table |
+
+> `T1` and `T2` are different aliases for the same table.
+
+---
+
+## SQL UNION Operator
+
+The **UNION** operator combines the result-set of two or more `SELECT` statements  
+and **removes duplicate rows** by default.
+
+### UNION Requirements
+
+- Same number of columns in each SELECT  
+- Similar data types  
+- Same column order  
+
+--
+
+### UNION Syntax
+
+| Command | Description |
+|--------|------------|
+| `SELECT column_name(s) FROM table1 UNION SELECT column_name(s) FROM table2;` | Combine results from two SELECT statements (duplicates removed) |
+
+--
+
+### UNION with WHERE Clause
+
+| Command | Description |
+|--------|------------|
+| `SELECT City, Country FROM Customers WHERE Country='Germany' UNION SELECT City, Country FROM Suppliers WHERE Country='Germany' ORDER BY City;` | Combine results from multiple tables with filtering and sorting |
